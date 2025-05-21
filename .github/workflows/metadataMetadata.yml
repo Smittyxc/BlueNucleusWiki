@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: set up Node.js env
         run: actions/setup-node@v4
-        with:
+        uses:
           node-version: '18'
 
       - name: Run metadata generation script

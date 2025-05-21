@@ -4,12 +4,21 @@ const path = require('path');
 function generateMetadata() {
     const allArticlesMetadata = []
     const subdirs = [];
-    demosPath = "demos";
+    const demosPath = "demos";
+    const metadataFile = "metadata.json"
 
     try {
-        const demosArticles = fs.readdirSync(ARTICLES_DIR, { withFileTypes: true })
-        allArticlesMetadata.push(demosArticles)
-        fs.writeFileSync(METADATA_FILE, JSON.stringify(allArticlesMetadata, null, 2)); // null, 2 for pretty printing
+        const demosArticles = fs.readdirSync(demosPath, { withFileTypes: true }).filter(dirent => dirent.isFile() && dirent.name.endsWith('.md'));
+        for(const file in demosArticles) {
+            const filePath = file.name
+            const articleMetadata = {
+                name: filePath
+            }
+            allArticlesMetadata.push(articleMetadata)
+        }
+
+
+        fs.writeFileSync(metadataFile, JSON.stringify(allArticlesMetadata, null, 2)); // null, 2 for pretty printing
 
     }
     catch(err) {
