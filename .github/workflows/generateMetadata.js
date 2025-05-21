@@ -9,7 +9,7 @@ function generateMetadata() {
 
     try {
         const demosArticles = fs.readdirSync(demosPath, { withFileTypes: true }).filter(dirent => dirent.isFile() && dirent.name.endsWith('.md'));
-        for(const file in demosArticles) {
+        for(const file of demosArticles) {
             const filePath = file.name
             const articleMetadata = {
                 name: filePath
